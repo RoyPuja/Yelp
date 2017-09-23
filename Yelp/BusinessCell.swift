@@ -30,8 +30,8 @@ class BusinessCell: UITableViewCell {
             if let url = business.imageURL {
                 thumbnailImgeView.setImageWith(url)
             }
-            
             ratingsImageView.setImageWith(business.ratingImageURL!)
+            amountLabel.text="$$"
         }
         
           
@@ -40,6 +40,8 @@ class BusinessCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        thumbnailImgeView.layer.cornerRadius=3
+        thumbnailImgeView.clipsToBounds=true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

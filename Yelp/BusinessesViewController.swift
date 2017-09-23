@@ -18,8 +18,10 @@ class BusinessesViewController: UIViewController,UITableViewDelegate,UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.yelpTableView.delegate=self
-        self.yelpTableView.dataSource = self
+        yelpTableView.delegate=self
+        yelpTableView.dataSource = self
+        yelpTableView.rowHeight=UITableViewAutomaticDimension
+        yelpTableView.estimatedRowHeight=80
         Business.searchWithTerm(term: "Thai", completion: { (businesses: [Business]?, error: Error?) -> Void in
             
             self.businesses = businesses
