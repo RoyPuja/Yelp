@@ -29,8 +29,8 @@ class BusinessesViewController: UIViewController,UITableViewDelegate,UITableView
             
             if let businesses = businesses {
                 for business in businesses {
-                    print(business.name!)
-                    print(business.address!)
+                  //  print(business.name!)
+                   // print(business.address!)
                 }
             }
             

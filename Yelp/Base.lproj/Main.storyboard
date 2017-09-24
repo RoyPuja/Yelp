@@ -113,14 +113,96 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Yelp" id="UJO-KS-Af1"/>
+                    <navigationItem key="navigationItem" title="Yelp" id="UJO-KS-Af1">
+                        <barButtonItem key="leftBarButtonItem" title="Filters" id="bRz-OF-d6B">
+                            <connections>
+                                <segue destination="95I-p1-mZF" kind="presentation" id="ftv-lM-LNQ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="yelpTableView" destination="Aj7-ea-Dwh" id="4yJ-zw-Of8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fgb-4b-F1b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2112.8000000000002" y="303.59820089955025"/>
+            <point key="canvasLocation" x="1692" y="293"/>
+        </scene>
+        <!--Filters View Controller-->
+        <scene sceneID="7BB-VW-mXc">
+            <objects>
+                <viewController id="HmW-g0-Dfy" customClass="FiltersViewController" customModule="Yelp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zKy-aT-HFK"/>
+                        <viewControllerLayoutGuide type="bottom" id="I57-Ma-53A"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ucB-Iz-phb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="529-rX-cay">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SwitchCell" rowHeight="87" id="7dY-xU-cvc" customClass="SwitchCell" customModule="Yelp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="87"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7dY-xU-cvc" id="UxQ-bJ-dTj">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="86.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8BO-tw-D8R">
+                                                    <rect key="frame" x="22" y="33" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nl3-o4-CUO">
+                                                    <rect key="frame" x="304" y="28" width="51" height="31"/>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="8BO-tw-D8R" firstAttribute="centerY" secondItem="UxQ-bJ-dTj" secondAttribute="centerY" id="8bR-7z-JQt"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="nl3-o4-CUO" secondAttribute="trailing" constant="14" id="YKX-Td-gRP"/>
+                                                <constraint firstItem="8BO-tw-D8R" firstAttribute="leading" secondItem="UxQ-bJ-dTj" secondAttribute="leadingMargin" constant="14" id="gan-Ha-Rgj"/>
+                                                <constraint firstItem="nl3-o4-CUO" firstAttribute="centerY" secondItem="UxQ-bJ-dTj" secondAttribute="centerY" id="yQd-5k-RDd"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="filterLabel" destination="8BO-tw-D8R" id="xUK-WE-5SI"/>
+                                            <outlet property="filterSwitch" destination="nl3-o4-CUO" id="egZ-4p-8UK"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="529-rX-cay" firstAttribute="leading" secondItem="ucB-Iz-phb" secondAttribute="leading" id="2MZ-FQ-dLP"/>
+                            <constraint firstItem="I57-Ma-53A" firstAttribute="top" secondItem="529-rX-cay" secondAttribute="bottom" id="EvS-Ae-Dx8"/>
+                            <constraint firstItem="529-rX-cay" firstAttribute="top" secondItem="ucB-Iz-phb" secondAttribute="top" id="FbD-Aa-8rb"/>
+                            <constraint firstAttribute="trailing" secondItem="529-rX-cay" secondAttribute="trailing" id="XIg-SQ-Cbs"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="CO7-Nq-vLv">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="aLP-r8-e34">
+                            <connections>
+                                <action selector="OnCancelButton:" destination="HmW-g0-Dfy" id="mbt-Dt-YbF"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Search" id="Vqi-1C-492">
+                            <connections>
+                                <action selector="OnSearchButton:" destination="HmW-g0-Dfy" id="tbU-cT-WoJ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="filtersTableView" destination="529-rX-cay" id="jCq-Cx-5RP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8nr-5b-B9H" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3325.5999999999999" y="292.80359820089956"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="2S8-PO-Zf3">
@@ -139,6 +221,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kBe-2V-PYd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="879" y="303"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="2TQ-Ib-Rta">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="95I-p1-mZF" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Bbn-wI-LdE">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="HmW-g0-Dfy" kind="relationship" relationship="rootViewController" id="2Xq-l2-huo"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6sN-B0-GNI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2458" y="293"/>
         </scene>
     </scenes>
 </document>
