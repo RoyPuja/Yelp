@@ -21,7 +21,7 @@ class FiltersViewController: UIViewController,UITableViewDataSource,UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         categories=yelpCategories()
-         filtersTableView.dataSource=self
+        filtersTableView.dataSource=self
         filtersTableView.delegate=self
         
         // Do any additional setup after loading the view.
@@ -38,9 +38,19 @@ class FiltersViewController: UIViewController,UITableViewDataSource,UITableViewD
     }
     
     @IBAction func OnSearchButton(_ sender: Any) {
-        //var filters = Filters()
-       // filters = self.filtersFromTableData()
-        //delegate?.filtersViewController?(filtersViewController: self, didUpdateFilters: filters)
+        dismiss(animated: true, completion: nil)
+        var filters = [String: AnyObject]()
+        var selectedCategories = [String]()
+        for (indexPath, isSelected) in switchStates {
+            if isSelected {
+              selectedCategories.append(categories[indexPath.row]["code"]!)
+                }
+            }
+        
+              if selectedCategories.count > 0 {
+                      filters["categories"] = selectedCategories as AnyObject
+                  }
+        delegate?.filtersViewController?(filtersViewController: self, didUpdateFilters: filters)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
