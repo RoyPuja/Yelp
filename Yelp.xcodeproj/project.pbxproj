@@ -20,6 +20,7 @@
 		6C24BB8F1F75072700A617C4 /* BusinessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C24BB8E1F75072700A617C4 /* BusinessCell.swift */; };
 		6CB3F6001F765446005FFB30 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB3F5FF1F765446005FFB30 /* SwitchCell.swift */; };
 		6CB3F6041F77F956005FFB30 /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB3F6031F77F956005FFB30 /* FiltersViewController.swift */; };
+		6CF601001F7868B50092C34F /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF600FF1F7868B50092C34F /* FilterCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		6C24BB8E1F75072700A617C4 /* BusinessCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessCell.swift; sourceTree = "<group>"; };
 		6CB3F5FF1F765446005FFB30 /* SwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
 		6CB3F6031F77F956005FFB30 /* FiltersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
+		6CF600FF1F7868B50092C34F /* FilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
 		883322706A784248B16F444A /* Pods-Yelp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yelp.release.xcconfig"; path = "Pods/Target Support Files/Pods-Yelp/Pods-Yelp.release.xcconfig"; sourceTree = "<group>"; };
 		9B128C050DE78660DE2A8E75 /* Pods-YelpTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YelpTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-YelpTests/Pods-YelpTests.release.xcconfig"; sourceTree = "<group>"; };
 		AA3C5CF4FD317D72ABE2AAC4 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -178,6 +180,7 @@
 			children = (
 				6C24BB8E1F75072700A617C4 /* BusinessCell.swift */,
 				6CB3F5FF1F765446005FFB30 /* SwitchCell.swift */,
+				6CF600FF1F7868B50092C34F /* FilterCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -397,6 +400,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C24BB8F1F75072700A617C4 /* BusinessCell.swift in Sources */,
+				6CF601001F7868B50092C34F /* FilterCell.swift in Sources */,
 				22AAAA9C1AEA1EC300A544AF /* BusinessesViewController.swift in Sources */,
 				6CB3F6041F77F956005FFB30 /* FiltersViewController.swift in Sources */,
 				22AAAA991AEA0A9700A544AF /* Business.swift in Sources */,

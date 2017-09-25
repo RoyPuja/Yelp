@@ -128,7 +128,7 @@
             </objects>
             <point key="canvasLocation" x="1692" y="293"/>
         </scene>
-        <!--Filters View Controller-->
+        <!--Filters-->
         <scene sceneID="7BB-VW-mXc">
             <objects>
                 <viewController id="HmW-g0-Dfy" customClass="FiltersViewController" customModule="Yelp" customModuleProvider="target" sceneMemberID="viewController">
@@ -144,21 +144,21 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SwitchCell" rowHeight="87" id="7dY-xU-cvc" customClass="SwitchCell" customModule="Yelp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="87"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SwitchCell" rowHeight="66" id="7dY-xU-cvc" customClass="SwitchCell" customModule="Yelp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="66"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7dY-xU-cvc" id="UxQ-bJ-dTj">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="86.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="65.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8BO-tw-D8R">
-                                                    <rect key="frame" x="22" y="33" width="42" height="21"/>
+                                                    <rect key="frame" x="22" y="22.5" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nl3-o4-CUO">
-                                                    <rect key="frame" x="304" y="28" width="51" height="31"/>
+                                                    <rect key="frame" x="304" y="17.5" width="51" height="31"/>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -173,7 +173,41 @@
                                             <outlet property="filterSwitch" destination="nl3-o4-CUO" id="egZ-4p-8UK"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FilterCell" id="R71-ZP-RoD" customClass="FilterCell" customModule="Yelp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="94" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="R71-ZP-RoD" id="eDc-eA-y9f">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y1l-7c-s5x">
+                                                    <rect key="frame" x="22" y="11.5" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WLr-3b-Zk1">
+                                                    <rect key="frame" x="292" y="-11" width="69" height="65"/>
+                                                    <state key="normal" title="DownButton" image="down_arrow"/>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="WLr-3b-Zk1" firstAttribute="centerY" secondItem="eDc-eA-y9f" secondAttribute="centerY" id="O13-OB-4gl"/>
+                                                <constraint firstAttribute="trailing" secondItem="WLr-3b-Zk1" secondAttribute="trailing" constant="14" id="TSo-6E-F0l"/>
+                                                <constraint firstItem="Y1l-7c-s5x" firstAttribute="centerY" secondItem="eDc-eA-y9f" secondAttribute="centerY" id="U6t-lR-r7I"/>
+                                                <constraint firstItem="Y1l-7c-s5x" firstAttribute="leading" secondItem="eDc-eA-y9f" secondAttribute="leadingMargin" constant="14" id="bnm-zO-qko"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="buttonDown" destination="WLr-3b-Zk1" id="ZLH-PZ-FAA"/>
+                                            <outlet property="buttonLabel" destination="Y1l-7c-s5x" id="O4O-IN-98a"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="HmW-g0-Dfy" id="Ssl-JB-4Hs"/>
+                                    <outlet property="delegate" destination="HmW-g0-Dfy" id="J9g-A1-R2I"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -184,7 +218,7 @@
                             <constraint firstAttribute="trailing" secondItem="529-rX-cay" secondAttribute="trailing" id="XIg-SQ-Cbs"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="CO7-Nq-vLv">
+                    <navigationItem key="navigationItem" title="Filters" id="CO7-Nq-vLv">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="aLP-r8-e34">
                             <connections>
                                 <action selector="OnCancelButton:" destination="HmW-g0-Dfy" id="mbt-Dt-YbF"/>
@@ -241,4 +275,7 @@
             <point key="canvasLocation" x="2458" y="293"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="down_arrow" width="64" height="64"/>
+    </resources>
 </document>

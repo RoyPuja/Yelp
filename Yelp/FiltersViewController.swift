@@ -12,20 +12,54 @@ import UIKit
     @objc optional func filtersViewController(filtersViewController: FiltersViewController, didUpdateFilters filters: [String:AnyObject])
 }
 
+
+
 class FiltersViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,SwitchCellDelegate{
 
     @IBOutlet weak var filtersTableView: UITableView!
     weak var delegate: FiltersViewControllerDelegate?
-     var switchStates: [IndexPath: Bool] = [IndexPath: Bool]()
-    var categories : [[String:String]]!
+    var sections:   [[String: String]]!
+    var deals:      [[String: String]]!
+    var radii:      [[String: Any]]!
+    var categories: [[String: String]]!
+    var sorts:      [[String: Any]]!
+    
+    var filtersTable: [[[String: Any]]]!
+    var switchStates: [[Int: Bool]]! 
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        categories=yelpCategories()
-        filtersTableView.dataSource=self
-        filtersTableView.delegate=self
+
+       //filtersTableView.dataSource=self
+       //filtersTableView.delegate=self
+        categories = yelpCategories()
+        radii=[
+            ["name": "Default", "meters": 0],
+            ["name": "0.5 mi",  "meters": 805],
+            ["name": "1 mi",    "meters": 1609],
+            ["name": "3 mi",    "meters": 4828],
+            ["name": "5 mi",    "meters": 8045]
+        ]
+        sorts = [ ["name": "Best match",    "code": 0],
+                  ["name": "Distance",      "code": 1],
+                  ["name": "Highest rated", "code": 2]
+        ]
+        deals=[
+            ["name": "Offering a deal"]
+              ]
         
-        // Do any additional setup after loading the view.
-    }
+       sections=[
+            ["name": "Deals",    "type": String(describing: SwitchCell.self)],
+            ["name": "Distance", "type": String(describing: FilterCell.self)],
+            ["name": "Sort By",  "type": String(describing: FilterCell.self)],
+            ["name": "Category", "type": String(describing: SwitchCell.self)]
+        ]
+        
+        filtersTable = [deals, radii, sorts, categories]
+        switchStates = [[Int: Bool]](repeating: [:], count: sections.count)
+        
+      }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -41,34 +75,70 @@ class FiltersViewController: UIViewController,UITableViewDataSource,UITableViewD
         dismiss(animated: true, completion: nil)
         var filters = [String: AnyObject]()
         var selectedCategories = [String]()
-        for (indexPath, isSelected) in switchStates {
+       /* for (indexPath, isSelected) in switchStates {
             if isSelected {
-              selectedCategories.append(categories[indexPath.row]["code"]!)
-                }
+                selectedCategories.append(categories[indexPath.row]["code"]!)
             }
+        }
         
-              if selectedCategories.count > 0 {
-                      filters["categories"] = selectedCategories as AnyObject
-                  }
+        if selectedCategories.count > 0 {
+            filters["categories"] = selectedCategories as AnyObject
+        }*/
         delegate?.filtersViewController?(filtersViewController: self, didUpdateFilters: filters)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categories.count
+        print(filtersTable[section].count)
+        return filtersTable[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-     let cell = filtersTableView.dequeueReusableCell(withIdentifier: "SwitchCell", for: indexPath) as! SwitchCell
-    cell.filterLabel.text=categories[indexPath.row]["name"]
-    cell.delegate = self
-    cell.filterSwitch.isOn = switchStates[indexPath] ?? false
-        return cell
+        if (sections[indexPath.section]["type"] == String(describing: SwitchCell.self)) {
+            let cell = filtersTableView.dequeueReusableCell(withIdentifier: "SwitchCell", for: indexPath) as! SwitchCell
+            let cellData = filtersTable[indexPath.section][indexPath.row]
+            cell.filterLabel.text = cellData["name"] as? String
+            cell.filterSwitch.isOn = switchStates[indexPath.section][indexPath.row] ?? false
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.delegate = self
+            
+            return cell
+        } else {
+            let cell = filtersTableView.dequeueReusableCell(withIdentifier: "FilterCell", for: indexPath) as! FilterCell
+            let cellData = filtersTable[indexPath.section][indexPath.row]
+            cell.buttonLabel.text = cellData["name"] as? String
+            cell.buttonDown.isHidden = switchStates[indexPath.section][indexPath.row] != true
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            return cell
+        }
+        
+       
     }
     
     func switchCellToggled(switchCell: SwitchCell, didChangeValue value: Bool) {
-        let indexPath=filtersTableView.indexPath(for: switchCell)!
-        switchStates[indexPath] = value
+        let indexPath = filtersTableView.indexPath(for: switchCell)!
+        switchStates[indexPath.section][indexPath.row] = switchCell.filterSwitch.isOn
     }
+    
+    public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        print(sections[section]["name"])
+     return sections[section]["name"]
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if (sections[indexPath.section]["type"] == String(describing: FilterCell.self)) {
+            
+           
+            for idx in switchStates[indexPath.section].keys {
+                switchStates[indexPath.section][idx] = false
+            }
+            switchStates[indexPath.section][indexPath.row] = true
+            filtersTableView.reloadData()
+        }
+    }
+    
+    
+    
     
     func yelpCategories() -> [[String:String]] {
         return [["name" : "Afghan", "code": "afghani"],
@@ -242,6 +312,11 @@ class FiltersViewController: UIViewController,UITableViewDataSource,UITableViewD
                 ["name" : "Yugoslav", "code": "yugoslav"]]
     }
     
+   
+        
+        
+    
+    
     /*
     // MARK: - Navigation
 
@@ -253,3 +328,4 @@ class FiltersViewController: UIViewController,UITableViewDataSource,UITableViewD
     */
 
 }
+
