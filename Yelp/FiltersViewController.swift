@@ -35,15 +35,23 @@ class FiltersViewController: UIViewController,UITableViewDataSource,UITableViewD
        //filtersTableView.delegate=self
         categories = yelpCategories()
         distance=[
-            ["name": "Default", "meters": 0],["name": "0.5 mi",  "meters": 805],["name": "1 mi",    "meters": 1609],["name": "3 mi",    "meters": 4828],["name": "5 mi",    "meters": 8045]
+            ["name": "Default", "meters": 0],
+            ["name": "0.5 mi",  "meters": 805],
+            ["name": "1 mi",    "meters": 1609],
+            ["name": "3 mi",    "meters": 4828],
+            ["name": "5 mi",    "meters": 8045]
         ]
-        sorts = [ ["name": "Best match",    "code": 0],["name": "Distance",      "code": 1],["name": "Highest rated", "code": 2]
+        sorts = [ ["name": "Best match",    "code": 0],
+                  ["name": "Distance",      "code": 1],
+                  ["name": "Highest rated", "code": 2]
         ]
         deals=[["name": "Offering a deal"]]
             
         
-       sections=[["name": "Deals",    "type": String(describing: SwitchCell.self)],["name": "Distance", "type": String(describing: FilterCell.self)],["name": "Sort By",  "type": String(describing: FilterCell.self)],
-            ["name": "Category", "type": String(describing: SwitchCell.self)]
+       sections=[["name": "Deals",    "type": String(describing: SwitchCell.self)],
+                 ["name": "Distance", "type": String(describing: FilterCell.self)],
+                 ["name": "Sort By",  "type": String(describing: FilterCell.self)],
+                 ["name": "Category", "type": String(describing: SwitchCell.self)]
         ]
         
         filtersTable = [deals, distance, sorts, categories]
@@ -55,7 +63,10 @@ class FiltersViewController: UIViewController,UITableViewDataSource,UITableViewD
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sections.count
+    }
+
 
     @IBAction func OnCancelButton(_ sender: Any) {
          dismiss(animated: true, completion: nil)
@@ -63,18 +74,44 @@ class FiltersViewController: UIViewController,UITableViewDataSource,UITableViewD
     
     @IBAction func OnSearchButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
-        var filters = [String: AnyObject]()
+        var filters = [String: Any]()
+        var dealsSelection: Bool?
+        var distanceSelection: Int!
+        var sortSelection: Int!
         var selectedCategories = [String]()
-       /* for (indexPath, isSelected) in switchStates {
-            if isSelected {
-                selectedCategories.append(categories[indexPath.row]["code"]!)
+        
+        for (sectionIdx, section) in switchStates.enumerated() {
+            for (cellIdx, isOn) in section {
+                if (sectionIdx == 0) { // deals
+                    dealsSelection = isOn
+                } else if (sectionIdx == 1) { //distance
+                    if isOn {
+                        distanceSelection = distance[cellIdx]["meters"] as! Int
+                    }
+                } else if (sectionIdx == 2) { // sort
+                    if isOn {
+                        sortSelection = sorts[cellIdx]["code"] as! Int
+                    }
+                } else if (sectionIdx == 3) { // category
+                    if isOn {
+                        selectedCategories.append(categories[cellIdx]["code"]!)
+                    }
+                }
             }
         }
         
+        filters["deals"] = dealsSelection ?? false
+        if (distanceSelection != 0) {
+            filters["distance"] = distanceSelection
+        }
+        filters["sort"] = sortSelection
         if selectedCategories.count > 0 {
-            filters["categories"] = selectedCategories as AnyObject
-        }*/
-        delegate?.filtersViewController?(filtersViewController: self, didUpdateFilters: filters)
+            filters["categories"] = selectedCategories as [String]
+        }
+        
+        delegate?.filtersViewController?(filtersViewController: self, didUpdateFilters: filters as [String : AnyObject])
+        
+
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

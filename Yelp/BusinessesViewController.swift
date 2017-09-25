@@ -13,19 +13,33 @@ class BusinessesViewController: UIViewController,UITableViewDelegate,UITableView
     @IBOutlet weak var yelpTableView: UITableView!
     var businesses: [Business]!
     
-    
-    
+     var searchController: UISearchController!
+    var filteredData: [String]!
     override func viewDidLoad() {
         super.viewDidLoad()
         
        let searchBar = UISearchBar()
         searchBar.sizeToFit()
         navigationItem.titleView = searchBar
+       // searchController = UISearchController(searchResultsController: nil)
+        //searchController.searchResultsUpdater = self as! UISearchResultsUpdating
+        //searchController.dimsBackgroundDuringPresentation = false
         
+       // searchController.searchBar.sizeToFit()
+       // yelpTableView.tableHeaderView = searchController.searchBar
+        
+        // Sets this view controller as presenting view controller for the search interface
+        //definesPresentationContext = true
         yelpTableView.delegate=self
         yelpTableView.dataSource = self
         yelpTableView.rowHeight=UITableViewAutomaticDimension
         yelpTableView.estimatedRowHeight=80
+        //searchBar.delegate = self
+        //searchBar.placeholder = "What sounds good?"
+        //navigationItem.titleView = searchBar
+        navigationController?.navigationBar.barTintColor = UIColor.red
+        
+        
         Business.searchWithTerm(term: "Thai", completion: { (businesses: [Business]?, error: Error?) -> Void in
             
             self.businesses = businesses
@@ -40,6 +54,7 @@ class BusinessesViewController: UIViewController,UITableViewDelegate,UITableView
             
             }
         )
+       
         
         /* Example of Yelp search with more search options specified
          Business.searchWithTerm("Restaurants", sort: .Distance, categories: ["asianfusion", "burgers"], deals: true) { (businesses: [Business]!, error: NSError!) -> Void in
@@ -95,4 +110,8 @@ class BusinessesViewController: UIViewController,UITableViewDelegate,UITableView
                         }
                       )
     }
+    
+    
+    
+    
 }
