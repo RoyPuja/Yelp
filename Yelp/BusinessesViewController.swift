@@ -103,12 +103,18 @@ class BusinessesViewController: UIViewController,UITableViewDelegate,UITableView
         
      }
     func filtersViewController(filtersViewController: FiltersViewController, didUpdateFilters filters: [String : AnyObject]) {
-        let categories = filters["categories"] as? [String]
-                   Business.searchWithTerm(term: "Bakeries", sort: nil, categories: categories, deals: nil, completion: { (resultBusinesses: [Business]?, error: Error?) -> Void in
-                            self.businesses = resultBusinesses
-                            self.yelpTableView.reloadData()
-                        }
-                      )
+        print(filters)
+        print(filters)
+        let categories = filters["categories"] as? [String] ?? nil
+        let dealsSelection = filters["deals"] as! Bool
+        let distanceSelection = filters["distance"] as? Int ?? nil
+        //let sortSelection = filters["sort"] as! Int
+        
+        Business.searchWithTerm(term: "Restaurant",sort: nil, categories: categories, deals: dealsSelection, completion: { (resultBusinesses: [Business]?, error: Error?) -> Void in
+            
+            self.businesses = resultBusinesses
+            self.yelpTableView.reloadData()
+        })
     }
     
     
