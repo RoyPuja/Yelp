@@ -20,12 +20,12 @@ class FiltersViewController: UIViewController,UITableViewDataSource,UITableViewD
     weak var delegate: FiltersViewControllerDelegate?
     var sections:   [[String: String]]!
     var deals:      [[String: String]]!
-    var radii:      [[String: Any]]!
+    var distance:      [[String: Any]]!
     var categories: [[String: String]]!
     var sorts:      [[String: Any]]!
     
     var filtersTable: [[[String: Any]]]!
-    var switchStates: [[Int: Bool]]! 
+    var switchStates: [[Int: Bool]]!
     
     
     override func viewDidLoad() {
@@ -34,29 +34,19 @@ class FiltersViewController: UIViewController,UITableViewDataSource,UITableViewD
        //filtersTableView.dataSource=self
        //filtersTableView.delegate=self
         categories = yelpCategories()
-        radii=[
-            ["name": "Default", "meters": 0],
-            ["name": "0.5 mi",  "meters": 805],
-            ["name": "1 mi",    "meters": 1609],
-            ["name": "3 mi",    "meters": 4828],
-            ["name": "5 mi",    "meters": 8045]
+        distance=[
+            ["name": "Default", "meters": 0],["name": "0.5 mi",  "meters": 805],["name": "1 mi",    "meters": 1609],["name": "3 mi",    "meters": 4828],["name": "5 mi",    "meters": 8045]
         ]
-        sorts = [ ["name": "Best match",    "code": 0],
-                  ["name": "Distance",      "code": 1],
-                  ["name": "Highest rated", "code": 2]
+        sorts = [ ["name": "Best match",    "code": 0],["name": "Distance",      "code": 1],["name": "Highest rated", "code": 2]
         ]
-        deals=[
-            ["name": "Offering a deal"]
-              ]
+        deals=[["name": "Offering a deal"]]
+            
         
-       sections=[
-            ["name": "Deals",    "type": String(describing: SwitchCell.self)],
-            ["name": "Distance", "type": String(describing: FilterCell.self)],
-            ["name": "Sort By",  "type": String(describing: FilterCell.self)],
+       sections=[["name": "Deals",    "type": String(describing: SwitchCell.self)],["name": "Distance", "type": String(describing: FilterCell.self)],["name": "Sort By",  "type": String(describing: FilterCell.self)],
             ["name": "Category", "type": String(describing: SwitchCell.self)]
         ]
         
-        filtersTable = [deals, radii, sorts, categories]
+        filtersTable = [deals, distance, sorts, categories]
         switchStates = [[Int: Bool]](repeating: [:], count: sections.count)
         
       }
